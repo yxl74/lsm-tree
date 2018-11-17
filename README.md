@@ -8,7 +8,7 @@ Insert: write the data pair into C0 which takes O(1) time. If a key is already p
 
 Update: write the data pair into which also takes O(1) time. If a key does not present in the database, it will simply insert this key-value pair into the database.
 
-Delete: Operation always success, write key-value pair {<key>, "DELETE" } into C0. The delete operation propagate to C1 and become consistent when a merge happens. 
+Delete: Operation always success, write key-value pair {"KEY", "DELETE" } into C0. The delete operation propagate to C1 and become consistent when a merge happens. 
 
 Get: First check LRU, then C0 and then finally C1. Returns NULL when nothing is found.
 
