@@ -232,8 +232,20 @@ void lsm_delete(char* key){
 	pthread_mutex_unlock(&lsm_lock);
 }
 
+
+
 void lsm_init(){
 	pthread_mutex_init(&lsm_lock, NULL);
+	//before initialization, check fo recovery
+
+
+	if (access("cur_fp.txt", F_OK) != -1){
+		//cur_fp exist, no need to re-initialize
+		c0.num_node = 0;
+		return;
+	}
+
+
 	c0.num_node = 0;
 	FILE *fp1 = fopen("cur_fp.txt", "w");
 	fprintf(fp1, "%s\n", "0"); //reference 0 as current consistent disk
